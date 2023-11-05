@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Restaurant Management System</title>
+    <style>
+        /* Add your CSS styles for the login page */
+        /* Example styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            text-align: center;
+        }
+        form {
+            margin-top: 100px;
+        }
+             /* Add your CSS styles for the header */
+        /* Example styles */
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Amigos Restaurant</h1>
+    </div>
+
+    
+    {% if message %}
+        <div id="messageBox">
+            {{ message }}
+        </div>
+        <script>
+            setTimeout(function() {
+                var messageBox = document.getElementById('messageBox');
+                messageBox.style.display = 'none';
+            }, 5000);
+        </script>
+    {% endif %}
+    <h1>Login</h1>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required><br><br>
+        <input type="password" name="password" placeholder="Password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+ 
+</body>
+</html>
