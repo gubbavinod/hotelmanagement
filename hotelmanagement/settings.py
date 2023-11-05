@@ -57,7 +57,7 @@ LOGIN_URL = "/Hotel/login/"  # Your login URL
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['/Users/santhoshnama/Desktop/React/Project/hotelmanagement/backendHotel/templates'],
+        "DIRS": [ BASE_DIR / 'backendHotel/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
