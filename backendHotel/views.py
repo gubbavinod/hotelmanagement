@@ -45,7 +45,13 @@ def get_cuisine_items(request):
     return JsonResponse(items, safe=False)
 
 
-
+@login_required
+def menu(request):
+    if not request.user.is_authenticated: #if the user is not authenticated
+        return redirect("menu")
+    else:
+        return render(request, 'menu.html')
+        
 @login_required
 def order(request):
     if not request.user.is_authenticated: #if the user is not authenticated
