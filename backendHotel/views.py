@@ -36,27 +36,6 @@ def logout_view(request):
     return redirect('/Hotel/login')  # Redirect to the login page after logging out
 
 
-@login_required
-def menu(request):
-    # Your CSV file path
-    file_path = '/Users/santhoshnama/Desktop/React/Project/hotelmanagement/backendHotel/meal_info.csv'
-    
-    # Function to fetch cuisines from the CSV file
-    def get_cuisines(file_path):
-        cuisines = []
-        with open(file_path, 'r') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                # Appending cuisine data to the list
-                cuisines.append({
-                    'name': row['cuisine']  # Image path from the CSV
-                })
-        return cuisines
-    
-    cuisine_data = get_cuisines(file_path)
-    return render(request, 'menu.html', {'cuisine_data': cuisine_data})
-
-
 
 def get_cuisine_items(request):
     cuisine = request.GET.get('cuisine')
