@@ -163,7 +163,7 @@
                                 {items.map(item => (
                                     <tr key={item.meal_id}>
                                         <td>{item.meal_id}</td>
-                                        <td>{item.category}</td>
+                                        <td>{item.item}</td>
                                         <td>${item.price}</td>
                                         <td>
                                             <button onClick={() => handleQuantityChange(item.meal_id, 'decrement')}>-</button>
