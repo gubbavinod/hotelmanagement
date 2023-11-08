@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import csv
 
-
+from backendHotel.databaseconnection import *
 
 def login_view(request):
     if request.method == 'POST':
@@ -60,16 +60,25 @@ def menu(request):
 
 def get_cuisine_items(request):
     cuisine = request.GET.get('cuisine')
-    file_path = '/Users/santhoshnama/Desktop/React/Project/hotelmanagement/backendHotel/meal_info.csv'
-    cuisine_items = {}
 
-    with open(file_path, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            if row['cuisine'] == cuisine:
-                item_list = cuisine_items.get(row['cuisine'], [])
-                item_list.append(row['Item'])
-                cuisine_items[row['cuisine']] = item_list
+    items = get_items_by_cuisine(cuisine)
+    
+    return JsonResponse(items, safe=False)
 
-    return JsonResponse(cuisine_items, safe=False)
+
+
+@login_required
+def order(request):
+    if not request.user.is_authenticated: #if the user is not authenticated
+        return redirect("login")
+    else:
+        return render(request, 'order.html')
+    
+def get_all_items(request):
+    
+    # Call the function to get the items
+    items = get_items_list()
+    
+    return JsonResponse(items, safe=False)
+
 

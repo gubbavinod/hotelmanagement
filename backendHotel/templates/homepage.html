@@ -128,33 +128,7 @@
     </style>
 </head>
 <body>
-    {% load static %}
-    <header>
-        <img src="{% static 'Icon.png' %}" alt="Restaurant Icon" class="restaurant-icon">
-        
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="{% url 'menu' %}">Menu</a></li>
-                <li><a href="#orders">Orders</a></li>
-                <li><a href="#reservations">Reservations</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="account-icon" onclick="toggleAccountDropdown()">
-                    <a href="#">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <div class="account-dropdown" id="accountDropdown">
-                        <p id="userName">User Profile</p>
-                        <ul>
-                           <li><a href="{% url 'logout' %}">Sign Out</a></li>
-                        </ul>
-                    </div>
-                </li>
-                
-            </ul>
-        </nav>
-    </header>
+    {% include 'header.html' %}
     
 
     <main>
