@@ -82,6 +82,24 @@
         const OrderApp = () => {
             const [items, setItems] = useState([]);
             const [currentView, setCurrentView] = useState('past-orders');
+            const [searchTerm, setSearchTerm] = useState('');
+
+
+            const handleSearch = (e) => {
+    const searchValue = e.target.value.toLowerCase();
+    setSearchTerm(searchValue);
+};
+
+const filterItems = items.filter((item) => {
+    // Convert the item object to an array of values
+    const values = Object.values(item);
+
+    // Check if any of the values in the row match the search term
+    return values.some(value =>
+        String(value).toLowerCase().includes(searchTerm)
+    );
+});
+
 
             useEffect(() => {
                 const loadItemsForNewOrder = async () => {
@@ -134,7 +152,22 @@
                             Create New Order
                         </div>
                         </div>
-                    {currentView === 'past-orders' && (
+                    {/* Search bar */}
+                    <input
+        type="text"
+        value={searchTerm}
+        onChange={handleSearch}
+        placeholder="Search...."
+        style={{
+            width: '300px', // Adjust the width as needed
+            height: '30px', // Adjust the height as needed
+            padding: '5px', // Add padding for better appearance
+            borderRadius: '5px', // Add rounded corners
+            border: '1px solid #ccc', // Add border for visibility
+        }}
+    />
+    
+                        {currentView === 'past-orders' && (
                         <table>
                             <thead>
                                 <tr>
@@ -145,8 +178,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* Render past orders data here */}
-                            </tbody>
+                           {/* past orders */}
+                        </tbody>
                         </table>
                     )}
                     {currentView === 'create-order' && (
@@ -160,19 +193,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {items.map(item => (
-                                    <tr key={item.meal_id}>
-                                        <td>{item.meal_id}</td>
-                                        <td>{item.item}</td>
-                                        <td>${item.price}</td>
-                                        <td>
-                                            <button onClick={() => handleQuantityChange(item.meal_id, 'decrement')}>-</button>
-                                            <span>{item.quantity || 0}</span>
-                                            <button onClick={() => handleQuantityChange(item.meal_id, 'increment')}>+</button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                            {filterItems.map((item) => (
+                                <tr key={item.meal_id}>
+                                    {/* Render items based on the filtered search term */}
+                                    <td>{item.meal_id}</td>
+                                    <td>{item.item}</td>
+                                    <td>${item.price}</td>
+                                    <td>
+                                        <button onClick={() => handleQuantityChange(item.meal_id, 'decrement')}>-</button>
+                                        <span>{item.quantity || 0}</span>
+                                        <button onClick={() => handleQuantityChange(item.meal_id, 'increment')}>+</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                         </table>
                     )}
                 </div>
