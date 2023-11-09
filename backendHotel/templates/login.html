@@ -4,6 +4,129 @@
     <meta charset="UTF-8">
     <title>Login - Restaurant Management System</title>
     <style>
+
+
+     
+     /* Global Reset & Styling */
+     body {
+         font-family: 'Arial', sans-serif;
+         margin: 0;
+         padding: 0;
+         background-color: #f7f7f7;
+         color: #333;
+         line-height: 1.6;
+     }
+ 
+     header {
+         background-color: #333;
+         color: #fff;
+         padding: 15px 0;
+     }
+ 
+     nav ul {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+         text-align: center;
+     }
+ 
+     nav ul li {
+         display: inline;
+         margin-right: 20px;
+     }
+ 
+     nav ul li a {
+         color: #fff;
+         text-decoration: none;
+     }
+ 
+     main {
+         padding: 20px;
+     }
+ 
+     section {
+         margin-bottom: 30px;
+         padding: 20px;
+         background-color: #fff;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     }
+ 
+     /* Specific Section Styling */
+     #home {
+         text-align: center;
+         padding: 80px 0;
+     }
+ 
+     #home h1 {
+         font-size: 3em;
+         margin-bottom: 20px;
+     }
+ 
+     #home p {
+         font-size: 1.2em;
+     }
+ 
+     /* Apply additional specific styling for other sections as desired */
+ 
+     #menu h2,
+     #orders h2,
+     #reservations h2,
+     #about h2,
+     #contact h2 {
+         font-size: 2em;
+         margin-bottom: 15px;
+     }
+ 
+     #menu p,
+     #orders p,
+     #reservations p,
+     #about p,
+     #contact p {
+         font-size: 1.1em;
+     }
+ 
+     .account-icon {
+ float: right;
+ margin-right: 20px;
+ position: relative;
+ }
+ 
+ .account-dropdown {
+ display: none;
+ position: absolute;
+ top: 30px;
+ right: 0;
+ background: #f8f5f5; /* Change the background color */
+ color: #0c0c0c; /* Change the text color */
+ border: 1px solid #120808;
+ padding: 10px;
+ border-radius: 5px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ z-index: 1;
+ width: 100px; /* Adjust the width as needed */
+ }
+ 
+ .account-dropdown.visible {
+ display: block;
+ }
+ 
+ 
+ .account-dropdown a {
+ color: #0c0c0c; /* Change anchor text color */
+ }
+ .restaurant-icon {
+         position: absolute;
+         top: -1%; /* Vertically center the icon */
+         left: -0.5%;
+         height: 8%; /* Set the icon height to match the header */
+         width: auto; /* Maintain aspect ratio */
+     }
+     .hotelicon {
+         position: relative;
+         margin-top: 20px;
+         height: 300px; /* Adjust this margin as needed */
+     }
+
         /* Add your CSS styles for the login page */
         /* Example styles */
         body {
@@ -29,8 +152,39 @@
         }
     </style>
 </head>
+
+
 <body>
-    {% include 'header.html' %}
+
+    {% load static %}
+    <header>
+        <img src="{% static 'Icon.png' %}" alt="Restaurant Icon" class="restaurant-icon">
+        
+        <nav>
+            <ul>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'menu' %}">Menu</a></li>
+                <li><a href="{% url 'order' %}">Orders</a></li>
+                <li><a href="#reservations">Reservations</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="account-icon" onclick="toggleAccountDropdown()">
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="account-dropdown" id="accountDropdown">
+                        <p id="userName">User Profile</p>
+                        <ul>
+                           <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+            </ul>
+        </nav>
+    </header>
+
+
 
     
     {% if message %}
@@ -42,6 +196,14 @@
                 var messageBox = document.getElementById('messageBox');
                 messageBox.style.display = 'none';
             }, 5000);
+
+
+            function toggleAccountDropdown() {
+  var dropdown = document.getElementById('accountDropdown');
+  dropdown.classList.toggle('visible');
+  
+}
+
         </script>
     {% endif %}
     <h1>Login</h1>
