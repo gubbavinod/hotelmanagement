@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    {% load static %}
+    <style>
+        /* Global Reset & Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Specific Section Styling */
+        #home {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        #home h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        #home p {
+            font-size: 1.2em;
+        }
+
+        #reservations h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        #reservations form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        #reservations button {
+            grid-column: span 2;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Add your existing styles here */
+
+        .account-icon {
+            float: right;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .account-dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background: #f8f5f5;
+            color: #0c0c0c;
+            border: 1px solid #120808;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            width: 100px;
+        }
+
+        .account-dropdown.visible {
+            display: block;
+        }
+
+        .account-dropdown a {
+            color: #0c0c0c;
+        }
+
+        .restaurant-icon {
+            position: absolute;
+            top: -1%;
+            height: 8%;
+            width: auto;
+        }
+
+        .hotelicon {
+            position: relative;
+            margin-top: 20px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <main>
+        <!-- Reservation Section -->
+        <section id="reservations">
+            <h2>Make a Reservation</h2>
+            <form id="reservationForm" onsubmit="submitReservation(event)">
+                <div>
+                    <label for="reservationDate">Date:</label>
+                    <input type="date" id="reservationDate" required>
+                </div>
+                <div>
+                    <label for="reservationTime">Time:</label>
+                    <select id="reservationTime" required>
+                        <option value="12:00 PM">12:00 PM</option>
+                        <option value="1:00 PM">1:00 PM</option>
+                        <option value="2:00 PM">2:00 PM</option>
+                        <option value="3:00 PM">3:00 PM</option>
+                        <option value="4:00 PM">4:00 PM</option>
+                        <option value="5:00 PM">5:00 PM</option>
+                        <option value="6:00 PM">6:00 PM</option>
+                        <option value="7:00 PM">7:00 PM</option>
+                        <option value="8:00 PM">8:00 PM</option>
+                        <option value="9:00 PM">9:00 PM</option>
+                        <option value="10:00 PM">10:00 PM</option>
+                        <!-- Add more time options as needed -->
+                    </select>
+                </div>
+                <div>
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div>
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="tel" id="phoneNumber" required>
+                </div>
+                <div>
+                    <label for="numOfPeople">Number of People:</label>
+                    <input type="number" id="numOfPeople" min="1" required>
+                </div>
+                <button type="submit">Submit Reservation</button>
+            </form>
+        </section>
+        <!-- End of Reservation Section -->
+
+        <!-- Other sections similar to the previous example -->
+    </main>
+
+    <script>
+        function submitReservation(event) {
+            event.preventDefault();
+
+            // Perform additional validation if needed
+            var date = document.getElementById('reservationDate').value;
+            var time = document.getElementById('reservationTime').value;
+            var fullName = document.getElementById('fullName').value;
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var numOfPeople = document.getElementById('numOfPeople').value;
+
+            // Check if all fields are filled
+            if (date && time && fullName && phoneNumber && numOfPeople) {
+                // Perform further actions (e.g., send data to the server)
+                alert('Reservation submitted successfully!');
+            } else {
+                alert('Please fill in all the required fields.');
+            }
+        }
+        var itemselected = document.getElementById('reservationLink');
+        // Change the background color
+        itemselected.style.backgroundColor ="red";
+    </script>
+</body>
+</html>
