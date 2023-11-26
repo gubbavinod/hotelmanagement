@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Restaurant Management System</title>
+    <style>
+
+
+     
+     /* Global Reset & Styling */
+     body {
+         font-family: 'Arial', sans-serif;
+         margin: 0;
+         padding: 0;
+         background-color: #f7f7f7;
+         color: #333;
+         line-height: 1.6;
+     }
+ 
+     header {
+         background-color: #333;
+         color: #fff;
+         padding: 15px 0;
+     }
+ 
+     nav ul {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+         text-align: center;
+     }
+ 
+     nav ul li {
+         display: inline;
+         margin-right: 20px;
+     }
+ 
+     nav ul li a {
+         color: #fff;
+         text-decoration: none;
+     }
+ 
+     main {
+         padding: 20px;
+     }
+ 
+     section {
+         margin-bottom: 30px;
+         padding: 20px;
+         background-color: #fff;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     }
+ 
+     /* Specific Section Styling */
+     #home {
+         text-align: center;
+         padding: 80px 0;
+     }
+ 
+     #home h1 {
+         font-size: 3em;
+         margin-bottom: 20px;
+     }
+ 
+     #home p {
+         font-size: 1.2em;
+     }
+ 
+     /* Apply additional specific styling for other sections as desired */
+ 
+     #menu h2,
+     #orders h2,
+     #reservations h2,
+     #about h2,
+     #contact h2 {
+         font-size: 2em;
+         margin-bottom: 15px;
+     }
+ 
+     #menu p,
+     #orders p,
+     #reservations p,
+     #about p,
+     #contact p {
+         font-size: 1.1em;
+     }
+ 
+     .account-icon {
+ float: right;
+ margin-right: 20px;
+ position: relative;
+ }
+ 
+ .account-dropdown {
+ display: none;
+ position: absolute;
+ top: 30px;
+ right: 0;
+ background: #f8f5f5; /* Change the background color */
+ color: #0c0c0c; /* Change the text color */
+ border: 1px solid #120808;
+ padding: 10px;
+ border-radius: 5px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ z-index: 1;
+ width: 100px; /* Adjust the width as needed */
+ }
+ 
+ .account-dropdown.visible {
+ display: block;
+ }
+ 
+ 
+ .account-dropdown a {
+ color: #0c0c0c; /* Change anchor text color */
+ }
+ .restaurant-icon {
+         position: absolute;
+         top: -1%; /* Vertically center the icon */
+         left: -0.5%;
+         height: 8%; /* Set the icon height to match the header */
+         width: auto; /* Maintain aspect ratio */
+     }
+     .hotelicon {
+         position: relative;
+         margin-top: 20px;
+         height: 300px; /* Adjust this margin as needed */
+     }
+
+        /* Add your CSS styles for the login page */
+        /* Example styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            text-align: center;
+        }
+        form {
+            margin-top: 100px;
+        }
+             /* Add your CSS styles for the header */
+        /* Example styles */
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-style: italic;
+        }
+              /* Add styles for the tabs */
+              .login-tabs {
+            margin-top: 20px;
+        }
+
+        .login-tab {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .login-tab:hover {
+            background-color: #ddd;
+        }
+
+        .login-tab.selected {
+            background-color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .signupForm {
+            text-align: center;
+        }
+
+        .signupForm .title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .inputContainer {
+            margin-bottom: 15px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .submitBtn {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            display: center;
+        }
+
+        .submitBtn:hover {
+            background-color: #555;
+        }
+
+     /* Style for the Login button */
+     button[type="submit"] {
+        background-color: #4CAF50; /* Green background color */
+        color: white; /* White text color */
+        padding: 10px 20px; /* Padding for better appearance */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Cursor style on hover */
+        width: 90px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049; /* Darker green color on hover */
+    }
+
+    /* Style for the Sign up button */
+    .submitBtns {
+        background-color: #3498db; /* Blue background color */
+        color: white; /* White text color */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Cursor style on hover */
+        width: 90px;
+        height: 40px;
+    }
+
+    .submitBtn:hover {
+        background-color: #2980b9; /* Darker blue color on hover */
+    }
+    </style>
+</head>
+
+
+<body>
+
+    {% load static %}
+    <header>
+        <img src="{% static 'Icon.png' %}" alt="Restaurant Icon" class="restaurant-icon">
+        
+        <nav>
+            <ul>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'menu' %}">Menu</a></li>
+                <li><a href="{% url 'order' %}">Orders</a></li>
+                <li><a href="#reservations">Reservations</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="account-icon" onclick="toggleAccountDropdown()">
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="account-dropdown" id="accountDropdown">
+                        <p id="userName">User Profile</p>
+                        <ul>
+                           <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+            </ul>
+        </nav>
+    </header>
+
+
+    <div class="login-tabs">
+        <div class="login-tab selected" data-type="customer" onclick="showLogin('customer', this)">Customer Login</div>
+        <div class="login-tab" data-type="manager" onclick="showLogin('manager', this)">Manager Login</div>
+    </div>
+    
+    <h1>Login</h1>
+
+<!-- Customer Login -->
+<div id="customerLogin">
+    <form action="{% url 'customer_login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Customer Username" required><br><br>
+        <input type="password" name="password" placeholder="Password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <br>
+    <!-- Signup Button -->
+    <button class="submitBtns" onclick="openSignupModal()">Signup</button>
+</div>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeSignupModal()">&times;</span>
+        <div class="signupForm">
+            <form action="{% url 'signup' %}" method="post" class="form">
+                {% csrf_token %}
+                <!-- Signup form content -->
+                <h1 class="title">Sign up</h1>
+                
+                <div class="inputContainer">
+                    <input type="text" class="input" name="customer_name" placeholder="Customer Name" required>
+                </div>
+
+                <div class="inputContainer">
+                    <input type="text" class="input" name="username" placeholder="Username" required>
+                </div>
+
+                <div class="inputContainer">
+                    <input type="password" class="input" name="password" placeholder="Password" required>
+                </div>
+                <div class="inputContainer">
+                    <input type="text" class="input" name="mailid" placeholder="Email" required>
+                </div>
+                <div class="inputContainer">
+                    <input type="text" class="input" name="phone_number" placeholder="Phone Number" required>
+                </div>
+                
+                <input type="submit" class="submitBtns" value="Sign up">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Manager Login -->
+<div id="managerLogin" style="display: none;">
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Manager Username" required><br><br>
+        <input type="password" name="password" placeholder="Password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+
+    {% if message %}
+        <div id="messageBox">
+            {{ message }}
+        </div>
+        {% endif %}
+        <script>
+            setTimeout(function() {
+                var messageBox = document.getElementById('messageBox');
+                messageBox.style.display = 'none';
+            }, 5000);
+
+
+            function toggleAccountDropdown() {
+            var dropdown = document.getElementById('accountDropdown');
+            dropdown.classList.toggle('visible');
+            }
+            window.onload = function () {
+                showLogin('customer');
+            };
+
+            function showLogin(type, clickedTab)  {
+                var customerForm = document.getElementById('customerLogin');
+                var managerForm = document.getElementById('managerLogin');
+                var signupButton = document.querySelector('.submitBtns');
+                if (type === 'customer') {
+                    customerForm.style.display = 'block';
+                    managerForm.style.display = 'none';
+                    signupButton.style.visibility = 'visible';
+                } else if (type === 'manager') {
+                    customerForm.style.display = 'none';
+                    managerForm.style.display = 'block';
+                    signupButton.style.visibility = 'hidden';
+                }
+    // Add 'selected' class to the clicked tab
+    clickedTab.classList.add('selected');
+
+// Remove 'selected' class from the other tab
+var otherTab = (type === 'customer') ? document.querySelector('.login-tab[data-type="manager"]') : document.querySelector('.login-tab[data-type="customer"]');
+otherTab.classList.remove('selected');
+            }
+
+
+            function openSignupModal() {
+            var signupModal = document.getElementById('signupModal');
+            signupModal.style.display = 'flex';
+        }
+
+        // Function to close the signup modal
+        function closeSignupModal() {
+            var signupModal = document.getElementById('signupModal');
+            signupModal.style.display = 'none';
+        }
+
+        </script>
+  
+    
+   
+</body>
+</html>
