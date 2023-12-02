@@ -143,7 +143,7 @@ def contactUS(request):
     if not request.session.get('user_status',''):  #if the user is not authenticated
         return redirect("login")
     else:
-        return render(request, 'contactUS.html')
+        return render(request, 'contactus.html')
 
 
 def about(request):
